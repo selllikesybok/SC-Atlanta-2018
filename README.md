@@ -1,5 +1,5 @@
 # SC-Atlanta-2018
-Supplementary Materials for "AAA on an Indie Budget - Building Your Own CRM From Common Household Parts"
+*Supplementary Materials for "AAA on an Indie Budget - Building Your Own CRM From Common Household Parts" from SourceCon Fall 2018.*
 
 Welcome SourceCon attendees! You're probably here because you attended (or wanted to) my talk at SourceCon Fall 2018, in Atlanta Georgia.
 
@@ -22,4 +22,4 @@ Questions? Having trouble making it work? Just wanna talk shop? Feel free to pin
   * [Github](https://github.com/selllikesybok/)
   * [StackOverflow](https://stackoverflow.com/users/791500/selllikesybok)
 
-Special thanks to [SourceCon](https://www.sourcecon.com/) for inviting me to speak, [Github](https://github.com/) for hosting this, [Google](https://www.google.com/) for providing a great set of tools and well-written documentation, the many wonderful contributors at [StackOverflow](https://stackoverflow.com) (without whom this project would never have been completed), my partners at [Brain Gain Recruiting](https://braingainrecruiting.com/) (home of [SocialList.io](https://sociallist.io/) and [Sourcing Certifications & Training](https://sourcingcertification.com/)) for tolerating my quasi-absense while I worked on this project and -- [cue the music](https://www.youtube.com/watch?v=vSBEiBbnT6E) 
+Special thanks to [SourceCon](https://www.sourcecon.com/) for inviting me to speak, [Github](https://github.com/) for hosting this, [Google](https://www.google.com/) for providing a great set of tools and well-written documentation, the many wonderful contributors at [StackOverflow](https://stackoverflow.com) (without whom this project would never have been completed), my partners at [Brain Gain Recruiting](https://braingainrecruiting.com/) (home of [SocialList.io](https://sociallist.io/) and [Sourcing Certifications & Training](https://sourcingcertification.com/)) for tolerating my quasi-absense while I worked on this project, and -- [cue the music](https://www.youtube.com/watch?v=vSBEiBbnT6E) 
