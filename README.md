@@ -1,7 +1,7 @@
 # SC-Atlanta-2018
 *Supplementary materials for "AAA on an Indie Budget - Building Your Own CRM From Common Household Parts", as presented at SourceCon Fall 2018.*
 
-...<this is a planceholder for graphics>
+...<this is a planceholder for graphics - something sourcecon-y prolly>
 
 Welcome SourceCon attendees! You're probably here because you attended (or wanted to) my talk at SourceCon Fall 2018, in Atlanta Georgia. I've included a copy of the slide deck [here](/AAA%20on%20an%20Indie%20Budget%20-%20Dave%20Galley%20-%20SC18F.pptx).
 
