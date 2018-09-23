@@ -1,2 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <style>
+      input[type="text"] {
+        width: 75%;
+      }
+    </style>
+    <script>
+       function sendDataToAddOrg() {
+         var missingRequired = '';
+         
+         var addLegalName = document.getElementsByName("legalname")[0].value;
 
-Sneaky!
+         if (addLegalName == '') {
+           missingRequired = missingRequired + "\nLegal Name - Must not be blank";
+         }
+
+         var addDBAs = document.getElementsByName("dbas")[0].value;
+
+         var addAddressStreet1 = document.getElementsByName("addressstreet1")[0].value;
+         var addAddressStreet2 = document.getElementsByName("addressstreet2")[0].value;         
+         var addAddressLocality = document.getElementsByName("addresslocality")[0].value;
+         var addAddressRegion = document.getElementsByName("addressregion")[0].value;
+         var addAddressCountry = document.getElementsByName("addresscountry")[0].value;
+         var addAddressPostCode = document.getElementsByName("addresspostcode")[0].value;
+
+         var addHQPhone = document.getElementsByName("hqphone")[0].value;
+         var addWebsite = document.getElementsByName("website")[0].value;
+         var addEmailDomain = document.getElementsByName("emaildomain")[0].value;
+         var addStatus = document.getElementsByName("status")[0].value;
+
+         if (missingRequired.length > 0) {
+           alert('The following required information is missing, or incorrectly formatted:\n' + missingRequired + '\n\nPlease update the form and save again.');
+         } else {
+           google.script.run.addOrg([null,addLegalName,addDBAs,null,addAddressStreet1,addAddressStreet2,addAddressLocality,addAddressRegion,addAddressCountry,addAddressPostCode,addHQPhone,addWebsite,addEmailDomain,addStatus]);
+           google.script.host.close();
+         } 
+       }
+    </script>
+    <p>Add a new Organization record to your CRM. The only required required field is Legal Name. If you enter a list of d/b/a or subsidiary aliases for a company, be sure to separate them with commas. Do not include commas within the aliases, i.e. write 'ACME, Inc.' as 'ACME Inc.</p>
+    Legal Name: <input name="legalname" type="text" placeholder="e.g. Alphabet Inc." /> <br>
+    Doing Busines As (or Subsidiaries): <input name="dbas" type="text" placeholder="e.g. Google, Nest, Waymo" /> <br>
+    Address Street1: <input name="addressstreet1" type="text" placeholder="e.g. 123 Main Street" /> <br>
+    Address Street2: <input name="addressstreet2" type="text" placeholder="e.g. Unit 25" /> <br>
+    Address Locality: <input name="addresslocality" type="text" placeholder="i.e., a city/town name like Anyplace" /> <br>
+    Address Region: <input name="addressregion" type="text" placeholder="i.e., a state/province name or abbreviation like New York or NJ" /> <br>
+    Address Country: <input name="addresscountry" type="text" placeholder="e.g. USA or United States" /> <br>
+    Address PostCode: <input name="addresspostcode" type="text" placeholder="e.g. 01234 or 01234-5678 or K1A 0B1" /> <br>
+    HQ Phone: <input name="hqphone" type="text" placeholder="e.g. +1 510-555-1212" /> <br> <!-- add a descriptor explaining about the way phones are handled -->
+    Website: <input name="website" type="text" placeholder="e.g. https://www.google.com/" /> <br>
+    Email Domain: <input name="emaildomain" type="text" placeholder="e.g. google.com" /> <br> <!-- add a descriptor explaining about the way emails are handled are handled -->
+    Status: <input name="status" type="text" placeholder="e.g. Prospect, Customer" /> <br>
+    <input type="button" value="Close"
+        onclick="google.script.host.close()" />
+    <input type="button" value="Save"
+        onclick="sendDataToAddOrg()" /> <!-- should create parameters from the input fields and call addOrg? -->
+  </body>
+</html>
