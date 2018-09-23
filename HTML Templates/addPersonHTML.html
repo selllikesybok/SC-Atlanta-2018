@@ -1,2 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <style>
+      input[type="text"] {
+        width: 75%;
+      }
+    </style>
+    <script>
+       function sendDataToAddPerson() {
+         var missingRequired = '';
+         
+         var addProspectType = document.getElementsByName("prospecttype")[0].value;
+         
+         if ((addProspectType != "Candidate") && (addProspectType != "Client")) {
+           missingRequired = missingRequired + "\nProspect Type - Must select Client or Candidate";
+         }
+         
+         var addPrefix = document.getElementsByName("prefix")[0].value;
 
-Sneaky!
+         var addFirstName = document.getElementsByName("firstname")[0].value;
+         
+         if (addFirstName == '') {
+           missingRequired = missingRequired + "\nFirst Name - Must not be blank";
+         }
+
+         var addMiddleNames = document.getElementsByName("middlenames")[0].value;
+         var addLastName = document.getElementsByName("lastname")[0].value;
+         
+         if (addLastName == '') {
+           missingRequired = missingRequired + "\nLast Name - Must not be blank";
+         }
+
+         var addSuffix = document.getElementsByName("suffix")[0].value;
+
+         var addPhones = document.getElementsByName("phones")[0].value;
+
+         var phonesCount = 0;
+         if ((addPhones != '') && (addPhones != null)) {
+           phonesCount = addPhones.split(",").length;
+         }
+         
+         var addPhoneTypes = document.getElementsByName("phonetypes")[0].value;
+         var pTypesCount = 0;
+         if ((addPhoneTypes != '') && (addPhoneTypes != null)) {
+           pTypesCount = addPhoneTypes.split(",").length;
+         }
+
+         if (phonesCount != pTypesCount) {
+           missingRequired = missingRequired + "\nPhones & Phone Types - Not required, but the number of entries for each field (with mutliple entries separated by commas) must be the same";
+         }           
+
+         var addEmails = document.getElementsByName("emails")[0].value;
+         var emailsCount = 0;
+         if ((addEmails != '') && (addEmails != null)) {
+           emailsCount = addEmails.split(",").length;
+         } else {
+           missingRequired = missingRequired + "\nEmails - Must not be blank";
+         }
+         
+         var addEmailTypes = document.getElementsByName("emailtypes")[0].value;
+         var eTypesCount = 0;
+         if ((addEmailTypes != '') && (addEmailTypes != null)){
+           eTypesCount = addEmailTypes.split(",").length
+         }
+         if (emailsCount != eTypesCount) {
+           missingRequired = missingRequired + "\nEmails & Email Types - The number of entries for each field (with mutliple entries separated by commas) must be the same, neither can be blank";
+         }           
+
+         var addAddressStreet1 = document.getElementsByName("addressstreet1")[0].value;
+         var addAddressStreet2 = document.getElementsByName("addressstreet2")[0].value;         
+         var addAddressLocality = document.getElementsByName("addresslocality")[0].value;
+         var addAddressRegion = document.getElementsByName("addressregion")[0].value;
+         var addAddressCountry = document.getElementsByName("addresscountry")[0].value;
+         var addAddressPostCode = document.getElementsByName("addresspostcode")[0].value;
+         var addStatus = document.getElementsByName("status")[0].value;
+         var addLatestTitle = document.getElementsByName("latesttitle")[0].value; //consider requiring for client Types
+         var addLatestCompany = document.getElementsByName("latestcompany")[0].value; // consider requiring for client Types
+         
+         if (missingRequired.length > 0) {
+           alert('The following required information is missing, or incorrectly formatted:\n' + missingRequired + '\n\nPlease update the form and save again.');
+         } else {
+           google.script.run.addPerson([null,addFirstName,addLastName,addMiddleNames,addSuffix,addPrefix,addPhones,addPhoneTypes,addEmails,addEmailTypes,addAddressStreet1,addAddressStreet2,addAddressLocality,addAddressRegion,addAddressCountry,addAddressPostCode,addProspectType,addStatus,addLatestTitle,addLatestCompany,false,null]);
+           google.script.host.close();
+         } 
+       }
+    </script>
+    <p>Add a new Person record to your CRM. Required fields are First Name, Last Name, Emails, and Email Types. Each Email must have a corresponding Email Type. To enter multiple Emails and Email Types, separate values with a comma (,).</p>
+    Prospect Type: <select name="prospecttype">
+      <option value="" disabled selected>Select Type</option>
+      <option value="Candidate">Candidate</option>
+      <option value="Client">Client</option>
+    </select><br>
+    Prefix: <input name="prefix" type="text" placeholder="e.g. Mr. or Dr. or Ms." /> <br>
+    First Name: <input name="firstname" type="text" placeholder="e.g. Fergus" /> <br>
+    Middle Name(s): <input name="middlenames" type="text" placeholder="e.g. St. James aka Goose aka Goosey" /> <br>
+    Last Name: <input name="lastname" type="text" placeholder="e.g. Galley" /> <br>
+    Suffix: <input name="suffix" type="text" placeholder="e.g. Senior or Junior or IV" /> <br>
+    Phones: <input name="phones" type="text" placeholder="Enter one or more separated by commas" /> <br> <!-- add a descriptor explaining about the way phones are handled -->
+    PhoneTypes: <input name="phonetypes" type="text" placeholder="For each phone above, enter a type; separate with commas" /> <br> <!-- add a descriptor explaining about the way phone-types are handled are handled -->
+    Emails: <input name="emails" type="text" placeholder="Enter one or more separated by commas" /> <br> <!-- add a descriptor explaining about the way emails are handled are handled -->
+    EmailTypes: <input name="emailtypes" type="text" placeholder="For each email above, enter a type; separate with commas " /> <br> <!-- add a descriptor explaining about the way email-types are handled are handled -->
+    Address Street1: <input name="addressstreet1" type="text" placeholder="e.g. 123 Main Street" /> <br>
+    Address Street2: <input name="addressstreet2" type="text" placeholder="e.g. Unit 25" /> <br>
+    Address Locality: <input name="addresslocality" type="text" placeholder="i.e., a city/town name like Anyplace" /> <br>
+    Address Region: <input name="addressregion" type="text" placeholder="i.e., a state/province name or abbreviation like New York or NJ" /> <br>
+    Address Country: <input name="addresscountry" type="text" placeholder="e.g. USA or United States" /> <br>
+    Address PostCode: <input name="addresspostcode" type="text" placeholder="e.g. 01234 or 01234-5678 or K1A 0B1" /> <br>
+    Status: <input name="status" type="text" placeholder="e.g. Contacted or Interview Pending or Submitted Proposal" /> <br>
+    Latest Title: <input name="latesttitle" type="text" placeholder="e.g. Java Developer or HR Director" /> <br>
+<!--Link to Existing Company: <input type="" /> <br>
+    Company ID: <input type="hidden" value="" /> <br> // implement this later -->
+    Latest Company: <input name="latestcompany" type="text" placeholder="e.g. FSJ&A or Microsoft" /> <br>
+    <input type="button" value="Close"
+        onclick="google.script.host.close()" />
+    <input type="button" value="Save"
+        onclick="sendDataToAddPerson()" /> <!-- should create parameters from the input fields and call addPerson? -->
+  </body>
+</html>
