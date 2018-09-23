@@ -3,7 +3,7 @@
 
 ![SC Atlanta 2018 Logo](/Graphics/sourcecon-atlanta-2018-graphic-for-readme.PNG)
 
-Welcome SourceCon attendees! You're probably here because you attended (or wanted to) my talk at SourceCon Fall 2018, in Atlanta Georgia. I've included a copy of the slide deck [here](/AAA%20on%20an%20Indie%20Budget%20-%20Dave%20Galley%20-%20SC18F.pptx).
+Welcome SourceCon attendees! You're probably here because you attended (or wanted to) my talk at SourceCon Fall 2018, in Atlanta Georgia. I've included a copy of the slide deck [here](/AAA%20on%20an%20Indie%20Budget%20-%20Dave%20Galley%20-%20SC18F.pdf).
 
 If not, or if it's been a while, I created this basic CRM as both an instructional aide and learning project. Being able to whip up simple (or not so simple) tools to help manage your workload or gather and process large amounts of online data is becoming an increasingly important skillset for the modern Sourcer. My hope is you'll join me in learning just enough about coding to start building your own!
 
