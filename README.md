@@ -1,11 +1,11 @@
 # SC-Atlanta-2018
 *Supplementary materials for "AAA on an Indie Budget - Building Your Own CRM From Common Household Parts", as presented at SourceCon Fall 2018.*
 
-...<this is a planceholder for graphics - something sourcecon-y prolly>
+![SC Atlanta 2018 Logo](/Graphics/sourcecon-atlanta-2018-graphic-for-readme.PNG)
 
 Welcome SourceCon attendees! You're probably here because you attended (or wanted to) my talk at SourceCon Fall 2018, in Atlanta Georgia. I've included a copy of the slide deck [here](/AAA%20on%20an%20Indie%20Budget%20-%20Dave%20Galley%20-%20SC18F.pptx).
 
-If not, or if it's been a while, I created this basic CRM as both an instructional aide and learning project. <placeholder for descriptive / inspirational / aspirational text>.
+If not, or if it's been a while, I created this basic CRM as both an instructional aide and learning project. Being able to whip up simple (or not so simple) tools to help manage your workload or gather and process large amounts of online data is becoming an increasingly important skillset for the modern Sourcer. My hope is you'll join me in learning just enough about coding to start building your own!
 
 To get started, click on over to the [walkthrough](/Installation%20and%20Setup%20Guide.md) I made for installing and setting up the model version of my CRM. The guide's got step-by-step install and setup instructions, including screenshots for each step. Hopefully it'll be easy to follow.
 
