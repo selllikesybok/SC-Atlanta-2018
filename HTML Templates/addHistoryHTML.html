@@ -1,2 +1,522 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+      $( "#datepicker" ).datepicker();
+      } );
+    </script>
+  </head>
+  <body>
+    <style>
+      input[type="text"] {
+        width: 75%;
+      }
+      textarea {
+        width: 90%;
+      }
+      .personToggle {
+        display: none;
+      }
+      .orgToggle {
+        display: none;
+      }
+      .adderToggle {
+        display: none;
+      }
+    </style>
+    <script>
+      function displayIndSelector() {
+        //change type selection, hide and reset the historyadder form
+        $(".adderToggle").hide();
+        var resetUUID = document.getElementById("uuid");
+        resetUUID.value = "";
+        var resetActionDateTimeDate = document.getElementById("datepicker");
+        resetActionDateTimeDate.selectedIndex = 0;
+        var resetActionDateTimeHour = document.getElementById("timehour");
+        resetActionDateTimeHour.selectedIndex = 0;
+        var resetActionDateTimeMinute = document.getElementById("timeminute");
+        resetActionDateTimeMinute.selectedIndex = 0;
+        var resetActionDateTimeOffset = document.getElementById("timeoffset");
+        resetActionDateTimeOffset.selectedIndex = 0;
+        var resetActionOutcome = document.getElementById("outcome");
+        resetActionOutcome.value = "";
+        var resetActionNextstep = document.getElementById("nextstep");
+        resetActionNextstep.value = "";
+        var resetActionDetails = document.getElementById("notes");
+        resetActionDetails.value = "";
 
-Sneaky!
+        //then determine which option chosen, and hide/reset the previous selection, show the new selection
+        //pending - the reset part
+        var getPersonSelectorDiv = document.getElementById("personselectordiv");
+        var getPersonSelector = document.getElementById("personselector");
+        getPersonSelector.selectedIndex = 0;
+        var getOrgSelectorDiv = document.getElementById("orgselectordiv");
+        var getOrgSelector = document.getElementById("orgselector");
+        getOrgSelector.selectedIndex = 0;
+        var holdTypeSelection = document.getElementById("historytype");
+        var selectedType = holdTypeSelection.options[holdTypeSelection.selectedIndex].value;
+        if (selectedType == "Person") {
+          $(".personToggle").show();
+          $(".orgToggle").hide();
+        } else if (selectedType == "Organization") {
+          $(".personToggle").hide();
+          $(".orgToggle").show();
+        }
+      }
+
+      function displayHistoryAdder() {
+        //change individual selection, hide and reset the historyadder form
+        var getHistoryAdder = document.getElementById("historyadder");
+        var resetUUID = document.getElementById("uuid");
+        resetUUID.value = "";
+        var resetActionType = document.getElementById("actiontype");
+        resetActionType.value = "";
+        var resetActionDateTimeDate = document.getElementById("datepicker");
+        resetActionDateTimeDate.value = "";
+        var resetActionDateTimeHour = document.getElementById("timehour");
+        resetActionDateTimeHour.selectedIndex = 0;
+        var resetActionDateTimeMinute = document.getElementById("timeminute");
+        resetActionDateTimeMinute.selectedIndex = 0;
+        var resetActionDateTimeOffset = document.getElementById("timeoffset");
+        resetActionDateTimeOffset.selectedIndex = 0;
+        var resetActionOutcome = document.getElementById("outcome");
+        resetActionOutcome.value = "";
+        var resetActionNextstep = document.getElementById("nextstep");
+        resetActionNextstep.value = "";
+        var resetActionDetails = document.getElementById("notes");
+        resetActionDetails.value = "";
+
+      
+        var holdTypeSelection = document.getElementById("historytype");
+        var selectedType = holdTypeSelection.options[holdTypeSelection.selectedIndex].value;
+        var holdIndSelection = '';
+        if (selectedType == 'Person') {
+          holdIndSelection = document.getElementById("personselector");
+        } else if (selectedType == 'Organization') {
+          holdIndSelection = document.getElementById("orgselector");
+        }
+        var selectedInd = holdIndSelection.options[holdIndSelection.selectedIndex].value;       
+        var fillUUID = document.getElementById("uuid");
+        fillUUID.value = selectedInd;
+        var getHistoryAdder = document.getElementById("historyadder");
+        $(".adderToggle").show();
+      }
+       
+      function sendDataToAddHistory() {
+        var missingRequired = '';
+        
+        var addLinkedUUID = document.getElementById("uuid").value; //if null or not set, type/ind not selected
+
+        if ((addLinkedUUID == "") || (addLinkedUUID == null)) {
+          missingRequired = missingRequired + "\nMust select an Organization or Person to attach a new History record to.";
+        }
+
+        var addActionType = document.getElementById("actiontype").value;
+
+        if ((addActionType == "") || (addActionType == null)) {
+          missingRequired = missingRequired + "\nAction Type - Must enter an action type";
+        }
+
+        var addActionDateTimeDate = document.getElementById("datepicker").value;
+         
+        if ((addActionDateTimeDate == "") || (addActionDateTimeDate == null)) {
+          missingRequired = missingRequired + "\nAction Date - Must select a date for this action.";
+          addActionDateTimeDate == "00/00/0000";
+        }
+
+        var addActionDateTimeHour = document.getElementById("timehour").value;
+         
+        if ((addActionDateTimeHour == "") || (addActionDateTimeHour == null)) {
+          missingRequired = missingRequired + "\nAction Time - Must select the hour";
+          addActionDateTimeHour == "00";
+        }
+
+        var addActionDateTimeMinute = document.getElementById("timeminute").value;
+         
+        if ((addActionDateTimeMinute == "") || (addActionDateTimeMinute == null)) {
+          missingRequired = missingRequired + "\nAction Time - Must select the minute";
+          addActionDateTimeMinute == "00";
+        }
+
+        var addActionDateTimeOffset = document.getElementById("timeoffset").value;
+         
+        if ((addActionDateTimeOffset == "") || (addActionDateTimeOffset == null)) {
+          missingRequired = missingRequired + "\nAction Time - Must select the timezone";
+          addActionDateTimeOffset == "±0000";
+        }
+
+        var reformattingDateArray = addActionDateTimeDate.split("/");
+        reformattingDateArray.reverse();
+        var reformattedDate = reformattingDateArray.join("-");
+        var buildingDateTimeArray = [reformattedDate,"T",addActionDateTimeHour,":",addActionDateTimeMinute,":00Z",addActionDateTimeOffset];
+        var addActionDateTime = '';
+        for (var i = 0; i < buildingDateTimeArray.length; i++) {
+          addActionDateTime = addActionDateTime + buildingDateTimeArray[i];
+        }
+         
+        var addActionOutcome = document.getElementById("outcome").value; //check is there and transcribe
+         
+        if ((addActionOutcome == "") || (addActionOutcome == null)) {
+          missingRequired = missingRequired + "\nAction Outcome - Must provide an outcome";
+        }
+
+        var addActionNextstep = document.getElementById("nextstep").value; //check is there and transcribe
+         
+        if ((addActionNextstep == "") || (addActionNextstep == null)) {
+          missingRequired = missingRequired + "\nAction Time - Must provide a next step";
+        }
+
+        var addActionDetails = document.getElementById("notes").value; //escape properly so all fits in one cell?
+        
+        if (missingRequired.length > 0) {
+          alert('The following required information is missing, or incorrectly formatted:\n' + missingRequired + '\n\nPlease update the form and save again.');
+        } else {
+          var sendToAdd = [null,addActionType,addActionDateTime,addActionOutcome,addActionNextstep,addActionDetails,addLinkedUUID];
+          //alert(sendToAdd + "\nLength should be 7, and is actually: " + sendToAdd.length);
+          google.script.run.addHistory(sendToAdd);
+          google.script.host.close();
+        } 
+      }
+    </script>
+    <p>Add a new History record to your CRM (phone calls, emails, etc.) -- all fields except for Notes / Details are required.</p>
+    Is this History item for a Person or Organization? <select onchange="displayIndSelector()" id="historytype">
+      <option value="" disabled selected>Select Type</option>
+      <option value="Person">Person</option>
+      <option value="Organization">Organization</option>
+    </select><br>
+
+    <div id="personselectordiv" class="personToggle">
+      <span id="personselectorlabel">Select a Person to Add History: </span> 
+      <select onchange="displayHistoryAdder()" id="personselector">
+        <option value="" disabled selected>Select Person</option>
+        <? for (var i = 0; i < data[0].length; i++ ) { ?>
+        <option value="<?= data[0][i][0] ?>"><?= data[0][i][1] ?></option>
+        <? } ?>
+      </select><br>
+    </div>
+    
+    <div id="orgselectordiv"  class="orgToggle">
+      <span id="orgselectorlabel">Select an Organization to Add History: </span> 
+      <select onchange="displayHistoryAdder()" id="orgselector">
+        <option value="" disabled selected>Select Organization</option>
+        <? for (var i = 0; i < data[1].length; i++ ) { ?>
+        <option value="<?= data[1][i][0] ?>"><?= data[1][i][1] ?></option>
+        <? } ?>
+      </select><br>
+    </div>
+    
+    <div id="historyadder"  class="adderToggle">
+      <input id="uuid" type="hidden" value="" />
+      Action Type: <input id="actiontype" type="text" placeholder="e.g. Call, Email, Onsite, Interview, Pitch" /> <br>
+      Action Date: <input type="text" id="datepicker" /> <br>
+      Action Time: 
+      <select id="timehour">
+        <option value="" disabled selected>  </option>
+        <option value="00">00</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+      </select>&nbsp; 
+      <select id="timeminute">
+        <option value="" disabled selected>  </option>
+        <option value="00">00</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="46">46</option>
+        <option value="47">47</option>
+        <option value="48">48</option>
+        <option value="49">49</option>
+        <option value="50">50</option>
+        <option value="51">51</option>
+        <option value="52">52</option>
+        <option value="53">53</option>
+        <option value="54">54</option>
+        <option value="55">55</option>
+        <option value="56">56</option>
+        <option value="57">57</option>
+        <option value="58">58</option>
+        <option value="59">59</option>
+      </select>&nbsp; 
+      <select id="timeoffset">
+        <option value="" disabled selected>Select Time Zone</option>
+        <option value="-0400">EDT (UTC-0400)</option>
+        <option value="-0500">EST (UTC-0500)</option>
+        <option value="-0500">CDT (UTC-0500)</option>
+        <option value="-0600">CST (UTC-0600)</option>
+        <option value="-0600">MDT (UTC-0600)</option>
+        <option value="-0700">MST (UTC-0700)</option>
+        <option value="-0700">PDT (UTC-0700)</option>
+        <option value="-0800">PST (UTC-0800)</option>
+        <option value="-0800">AKDT (UTC-0800)</option>
+        <option value="-0900">AKST (UTC-0900)</option>
+        <option value="-0900">HDT (UTC-0900)</option>
+        <option value="-1000">HST (UTC-1000)</option>
+        <option value="" disabled>-----------------</option>
+        <option value="-1200">BIT (UTC-1200)</option>
+        <option value="-1200">IDLW (UTC-1200)</option>
+        <option value="-1100">NUT (UTC-1100)</option>
+        <option value="-1100">SST (UTC-1100)</option>
+        <option value="-1000">CKT (UTC-1000)</option>
+        <option value="-1000">SDT (UTC-1000)</option>
+        <option value="-1000">TAHT (UTC-1000)</option>
+        <option value="-0930">MART (UTC-0930)</option>
+        <option value="-0930">MIT (UTC-0930)</option>
+        <option value="-0900">GAMT (UTC-0900)</option>
+        <option value="-0900">GIT (UTC-0900)</option>
+        <option value="-0800">CIST (UTC-0800)</option>
+        <option value="-0600">EAST (UTC-0600)</option>
+        <option value="-0600">GALT (UTC-0600)</option>
+        <option value="-0500">ACT (UTC-0500)</option>
+        <option value="-0500">COT (UTC-0500)</option>
+        <option value="-0500">CST (UTC-0500)</option>
+        <option value="-0500">EASST (UTC-0500)</option>
+        <option value="-0500">ECT (UTC-0500)</option>
+        <option value="-0500">PET (UTC-0500)</option>
+        <option value="-0400">AMT (UTC-0400)</option>
+        <option value="-0400">AST (UTC-0400)</option>
+        <option value="-0400">BOT (UTC-0400)</option>
+        <option value="-0400">CDT (UTC-0400)</option>
+        <option value="-0400">CLT (UTC-0400)</option>
+        <option value="-0400">COST (UTC-0400)</option>
+        <option value="-0400">ECT (UTC-0400)</option>
+        <option value="-0400"></option>
+        <option value="-0400">FKT (UTC-0400)</option>
+        <option value="-0400">GYT (UTC-0400)</option>
+        <option value="-0400">PYT (UTC-0400)</option>
+        <option value="-0400">VET (UTC-0400)</option>
+        <option value="-0330">NST (UTC-0330)</option>
+        <option value="-0330">NT (UTC-0330)</option>
+        <option value="-0300">ADT (UTC-0300)</option>
+        <option value="-0300">AMST (UTC-0300)</option>
+        <option value="-0300">ART (UTC-0300)</option>
+        <option value="-0300">BRT (UTC-0300)</option>
+        <option value="-0300">CLST (UTC-0300)</option>
+        <option value="-0300">FKST (UTC-0300)</option>
+        <option value="-0300">GFT (UTC-0300)</option>
+        <option value="-0300">PMST (UTC-0300)</option>
+        <option value="-0300">PYST (UTC-0300)</option>
+        <option value="-0300">ROTT (UTC-0300)</option>
+        <option value="-0300">SRT (UTC-0300)</option>
+        <option value="-0300">UYT (UTC-0300)</option>
+        <option value="-0230">NDT (UTC-0230)</option>
+        <option value="-0200">BRST (UTC-0200)</option>
+        <option value="-0200">FNT (UTC-0200)</option>
+        <option value="-0200">GST (UTC-0200)</option>
+        <option value="-0200">PMDT (UTC-0200)</option>
+        <option value="-0200">UYST (UTC-0200)</option>
+        <option value="-0100">AZOT (UTC-0100)</option>
+        <option value="-0100">CVT (UTC-0100)</option>
+        <option value="-0100">EGT (UTC-0100)</option>
+        <option value="±0000">AZOST (UTC±0000)</option>
+        <option value="±0000">EGST (UTC±0000)</option>
+        <option value="±0000">GMT (UTC±0000)</option>
+        <option value="±0000">UTC (UTC±0000)</option>
+        <option value="±0000">WET (UTC±0000)</option>
+        <option value="+0100">BST (UTC+0100)</option>
+        <option value="+0100">CET (UTC+0100)</option>
+        <option value="+0100">DFT (UTC+0100)</option>
+        <option value="+0100">IST (UTC+0100)</option>
+        <option value="+0100">MET (UTC+0100)</option>
+        <option value="+0100">WAT (UTC+0100)</option>
+        <option value="+0100">WEST (UTC+0100)</option>
+        <option value="+0200">CAT (UTC+0200)</option>
+        <option value="+0200">CEST (UTC+0200)</option>
+        <option value="+0200">EET (UTC+0200)</option>
+        <option value="+0200">HAEC (UTC+0200)</option>
+        <option value="+0200">IST (UTC+0200)</option>
+        <option value="+0200">KALT (UTC+0200)</option>
+        <option value="+0200">MEST (UTC+0200)</option>
+        <option value="+0200">SAST (UTC+0200)</option>
+        <option value="+0200">WAST (UTC+0200)</option>
+        <option value="+0300">AST (UTC+0300)</option>
+        <option value="+0300">EAT (UTC+0300)</option>
+        <option value="+0300">EEST (UTC+0300)</option>
+        <option value="+0300">FET (UTC+0300)</option>
+        <option value="+0300">IDT (UTC+0300)</option>
+        <option value="+0300">IOT (UTC+0300)</option>
+        <option value="+0300">MSK (UTC+0300)</option>
+        <option value="+0300">SYOT (UTC+0300)</option>
+        <option value="+0300">TRT (UTC+0300)</option>
+        <option value="+0330">IRST (UTC+0330)</option>
+        <option value="+0400">AMT (UTC+0400)</option>
+        <option value="+0400">AZT (UTC+0400)</option>
+        <option value="+0400">GET (UTC+0400)</option>
+        <option value="+0400">GST (UTC+0400)</option>
+        <option value="+0400">MUT (UTC+0400)</option>
+        <option value="+0400">RET (UTC+0400)</option>
+        <option value="+0400">SAMT (UTC+0400)</option>
+        <option value="+0400">SCT (UTC+0400)</option>
+        <option value="+0400">VOLT (UTC+0400)</option>
+        <option value="+0430">AFT (UTC+0430)</option>
+        <option value="+0430">IRDT (UTC+0430)</option>
+        <option value="+0500">HMT (UTC+0500)</option>
+        <option value="+0500">MAWT (UTC+0500)</option>
+        <option value="+0500">MVT (UTC+0500)</option>
+        <option value="+0500">ORAT (UTC+0500)</option>
+        <option value="+0500">PKT (UTC+0500)</option>
+        <option value="+0500">TFT (UTC+0500)</option>
+        <option value="+0500">TJT (UTC+0500)</option>
+        <option value="+0500">TMT (UTC+0500)</option>
+        <option value="+0500">UZT (UTC+0500)</option>
+        <option value="+0500">YEKT (UTC+0500)</option>
+        <option value="+0530">IST (UTC+0530)</option>
+        <option value="+0530">SLST (UTC+0530)</option>
+        <option value="+0545">NPT (UTC+0545)</option>
+        <option value="+0600">BIOT (UTC+0600)</option>
+        <option value="+0600">BST (UTC+0600)</option>
+        <option value="+0600">BTT (UTC+0600)</option>
+        <option value="+0600">KGT (UTC+0600)</option>
+        <option value="+0600">OMST (UTC+0600)</option>
+        <option value="+0600">VOST (UTC+0600)</option>
+        <option value="+0630">CCT (UTC+0630)</option>
+        <option value="+0630">MMT (UTC+0630)</option>
+        <option value="+0700">CXT (UTC+0700)</option>
+        <option value="+0700">DAVT (UTC+0700)</option>
+        <option value="+0700">HOVT (UTC+0700)</option>
+        <option value="+0700">ICT (UTC+0700)</option>
+        <option value="+0700">KRAT (UTC+0700)</option>
+        <option value="+0700">THA (UTC+0700)</option>
+        <option value="+0700">WIT (UTC+0700)</option>
+        <option value="+0800">AWST (UTC+0800)</option>
+        <option value="+0800">BDT (UTC+0800)</option>
+        <option value="+0800">CHOT (UTC+0800)</option>
+        <option value="+0800">CIT (UTC+0800)</option>
+        <option value="+0800">CST (UTC+0800)</option>
+        <option value="+0800">CT (UTC+0800)</option>
+        <option value="+0800">HKT (UTC+0800)</option>
+        <option value="+0800">HOVST (UTC+0800)</option>
+        <option value="+0800">IRKT (UTC+0800)</option>
+        <option value="+0800">MST (UTC+0800)</option>
+        <option value="+0800">MYT (UTC+0800)</option>
+        <option value="+0800">PHT (UTC+0800)</option>
+        <option value="+0800">PST (UTC+0800)</option>
+        <option value="+0800">SGT (UTC+0800)</option>
+        <option value="+0800">SST (UTC+0800)</option>
+        <option value="+0800">ULAT (UTC+0800)</option>
+        <option value="+0800">WST (UTC+0800)</option>
+        <option value="+0845">ACWST (UTC+0845)</option>
+        <option value="+0845">CWST (UTC+0845)</option>
+        <option value="+0900">CHOST (UTC+0900)</option>
+        <option value="+0900">EIT (UTC+0900)</option>
+        <option value="+0900">JST (UTC+0900)</option>
+        <option value="+0900">KST (UTC+0900)</option>
+        <option value="+0900">TLT (UTC+0900)</option>
+        <option value="+0900">ULAST (UTC+0900)</option>
+        <option value="+0900">YAKT (UTC+0900)</option>
+        <option value="+0930">ACST (UTC+0930)</option>
+        <option value="+1000">AEST (UTC+1000)</option>
+        <option value="+1000">CHST (UTC+1000)</option>
+        <option value="+1000">CHUT (UTC+1000)</option>
+        <option value="+1000">DDUT (UTC+1000)</option>
+        <option value="+1000">PGT (UTC+1000)</option>
+        <option value="+1000">VLAT (UTC+1000)</option>
+        <option value="+1030">ACDT (UTC+1030)</option>
+        <option value="+1030">LHST (UTC+1030)</option>
+        <option value="+1100">AEDT (UTC+1100)</option>
+        <option value="+1100">BST (UTC+1100)</option>
+        <option value="+1100">KOST (UTC+1100)</option>
+        <option value="+1100">LHST (UTC+1100)</option>
+        <option value="+1100">MIST (UTC+1100)</option>
+        <option value="+1100">NCT (UTC+1100)</option>
+        <option value="+1100">NFT (UTC+1100)</option>
+        <option value="+1100">PONT (UTC+1100)</option>
+        <option value="+1100">SAKT (UTC+1100)</option>
+        <option value="+1100">SBT (UTC+1100)</option>
+        <option value="+1100">SRET (UTC+1100)</option>
+        <option value="+1100">VUT (UTC+1100)</option>
+        <option value="+1200">FJT (UTC+1200)</option>
+        <option value="+1200">GILT (UTC+1200)</option>
+        <option value="+1200">MAGT (UTC+1200)</option>
+        <option value="+1200">MHT (UTC+1200)</option>
+        <option value="+1200">NZST (UTC+1200)</option>
+        <option value="+1200">PETT (UTC+1200)</option>
+        <option value="+1200">TVT (UTC+1200)</option>
+        <option value="+1200">WAKT (UTC+1200)</option>
+        <option value="+1245">CHAST (UTC+1245)</option>
+        <option value="+1300">NZDT (UTC+1300)</option>
+        <option value="+1300">PHOT (UTC+1300)</option>
+        <option value="+1300">TKT (UTC+1300)</option>
+        <option value="+1300">TOT (UTC+1300)</option>
+        <option value="+1345">CHADT (UTC+1345)</option>
+        <option value="+1400">LINT (UTC+1400)</option>
+      </select><br>
+      Action Outcome: <input id="outcome" type="text" placeholder="e.g. brief note on result of action" /> <br>
+      Next Step: <input id="nextstep" type="text" placeholder="e.g. brief note on next step to take" /> <br>
+      Notes / Details: <br>
+      <textarea id="notes" placeholder="e.g. paste email body, call transcript, or other detailed notes here"></textarea> <br>
+<!--  Attachment: <input id="attachment" type="text" placeholder="" /> <br> //not yet implemented -->
+    </div>
+    <input type="button" value="Close"
+      onclick="google.script.host.close()" />
+    <input type="button" value="Save"
+      onclick="sendDataToAddHistory()" /> <!-- should create parameters from the input fields and call addHistory? -->
+</body>
+</html>
