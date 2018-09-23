@@ -6,18 +6,44 @@ Once you have created or signed into your Google account, click on [this link](h
 
 ![demo-crm-to-copy](/Graphics/demo-crm-to-copy.PNG)
 
-Click on the File menu, and choose Make a copy... from the dropdown.
+Click on the `File` menu, and choose `Make a copy...` from the dropdown, 
 
-![make-a-copy-step1](/Graphics/make-a-copy-step1.PNG)
+![make-a-copy-step1](/Graphics/make-a-copy-step1.png)
 
-Then...
+rename it if you like, choose where to save it, and hit `OK`. Now you've got your very own copy to work with. Just a few more steps to get it up and running.
 
-You might want to rename it - go for it
+If your new file didn't open automatically, go find it in your Drive and make sure you've got it pulled up, as the next few instructions won't work if you're still looking at the `View Only` copy! Yours should look something like this, depending on what you named it:
 
-open up the script editor
+![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
 
-select and run the setup thingy
+From top menu, select `Tools`, then `<> Script editor`, 
 
-auth walkthrough
+![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
 
-initial setup steps
+to open up the script editor in a new tab. Your view should now be something like this:
+
+![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
+
+This is a view I hope you'll become pretty familiar with soon. The script editor is where we access all the code embedded in the spreadsheet. You're looking at a Google App Script project file. In order to give an App Script project full access to edit and update your Google Sheets file, it needs to be created from the script editor menu. 
+
+Within this project are several sub-files, an `appscript.json` file you should leave alone unless you know what you're doing (I still don't), a `CRM Functions.gs` file that contains all my App Script code, and a series of `.html` files, each containing the HTML code required to show various popups and views used by the CRM. 
+
+`CRM Functions.gs` should be the first file that opens up, but if not, click on it now. You'll notice that it's a pretty long file, perhaps a bit unweildly. You can split your code into as many `.gs` files as you like, I just felt it was easier to keep it in one for distribution purposes. Just make sure you don't duplicate functions between the files, if you split them up!
+
+With the `CRM Functions.gs` file open, click on `Select function` option, and choose ??? from the dropdown. `onOpen` is a special reserved function that will automatically run each time you open (or refresh the page) the CRM spreadsheet, but we have to trigger it manually the first time.
+
+<describe auth workflow w/ picture>
+
+Once you finish, you should see a few things happen - first, a new menu option will appear - it has several options to choose <describe utilities menu>
+  
+Then all of the tabs will disappear along the bottom (don't worry, they're not gone, just hiding). We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them with the 'unhide' option in the utilities menu when it's time to make changes to how the CRM works.
+
+Next, you'll be prompted to enter some initial settings, like <describe>
+  
+And finally, the page is updated to reflect our new user settings, and your Demo CRM is ready to run! 
+
+I've included some sample data, so all the basic functions??? Unfortunately, with no data, it's pretty empty right now. Try clicking the `Add Person` (or Org, or History) buttons, and enter some information, to get a feel for how it works. 
+
+Congrats, you're all set up. I don't think Demo CRM has enough functionality to be useful as it stands, but I hope it'll serve as an interesting example project as you get started exploring the wonderful world of App Script and GSuite extensions. I do intend to keep developing Demo CRM, eventually, so if you'd like get notified when I make changes, sign up for Github and follow the repo.
+
+Notice a bug, want to suggest the next feature, etc? Pop open a new Issue and let me know!
