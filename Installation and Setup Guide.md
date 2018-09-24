@@ -14,15 +14,15 @@ rename it if you like, choose where to save it, and hit `OK`. Now you've got you
 
 If your new file didn't open automatically, go find it in your Drive and make sure you've got it pulled up, as the next few instructions won't work if you're still looking at the `View Only` copy! Yours should look something like this, depending on what you named it:
 
-![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
+![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.PNG)
 
 From top menu, select `Tools`, then `<> Script editor`, 
 
-![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
+![tools-script-editor](/Graphics/tools-script-editor.PNG) 
 
 to open up the script editor in a new tab. Your view should now be something like this:
 
-![new-demo-crm-copy-first-look](/Graphics/new-demo-crm-copy-first-look.png) //placeholder for image, need to fix it up
+![script-editor-view](/Graphics/script-editor-view.PNG)
 
 This is a view I hope you'll become pretty familiar with soon. The script editor is where we access all the code embedded in the spreadsheet. You're looking at a Google App Script project file. In order to give an App Script project full access to edit and update your Google Sheets file, it needs to be created from the script editor menu. 
 
@@ -30,20 +30,46 @@ Within this project are several sub-files, an `appscript.json` file you should l
 
 `CRM Functions.gs` should be the first file that opens up, but if not, click on it now. You'll notice that it's a pretty long file, perhaps a bit unweildly. You can split your code into as many `.gs` files as you like, I just felt it was easier to keep it in one for distribution purposes. Just make sure you don't duplicate functions between the files, if you split them up!
 
-With the `CRM Functions.gs` file open, click on `Select function` option, and choose ??? from the dropdown. `onOpen` is a special reserved function that will automatically run each time you open (or refresh the page) the CRM spreadsheet, but we have to trigger it manually the first time.
+With the `CRM Functions.gs` file open, click on `Select function` option, and choose `onOpen` from the dropdown. `onOpen` is a special reserved function that will automatically run each time you open (or refresh the page) the CRM spreadsheet, but we have to trigger it manually the first time. To do so, click the "play" button:
 
-<describe auth workflow w/ picture>
+![run-onopen](/Graphics/run-onopen.PNG)
+
+Now you'll be prompted to give the App Scrip project access to Google Account, which it needs in order to work. While it looks a little intimidating, remember that this is, ultimately, your code running in your spreadsheet, inside your account, so it shouldn't be cause for worry.
+
+![demo crm auth required](/Graphics/demo crm auth required.png)
+
+Click continue when prompted to being the authorization process, then
+
+![demo crm authflow first](/Graphics/demo crm authflow first.png.PNG)
+
+choose the account (if you have more than one) that has the Demo CRM stored on its Google Drive. You'll probably see a warning like  
+
+![demo crm authflow see more](/Graphics/demo crm authflow see more.png)
+
+which seems to stop you from proceeding, but click 'see more' at the bottom, and you'll get
+
+![demo crm authflow proceed](/Graphics/demo crm authflow proceed.png)
+
+the option to proceed. Which will lead you to the final step, 
+
+![demo crm authflow final](/Graphics/demo crm authflow final.png)
+
+explicitly allowing your App Script project to do what you asked it to do!
 
 Once you finish, you should see a few things happen - first, a new menu option will appear - it has several options to choose <describe utilities menu>
-  
-Then all of the tabs will disappear along the bottom (don't worry, they're not gone, just hiding). We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them with the 'unhide' option in the utilities menu when it's time to make changes to how the CRM works.
 
 Next, you'll be prompted to enter some initial settings, like <describe>
-  
+
+<image>?
+
 And finally, the page is updated to reflect our new user settings, and your Demo CRM is ready to run! 
 
-I've included some sample data, so all the basic functions??? Unfortunately, with no data, it's pretty empty right now. Try clicking the `Add Person` (or Org, or History) buttons, and enter some information, to get a feel for how it works. 
+<final image>
 
-Congrats, you're all set up. I don't think Demo CRM has enough functionality to be useful as it stands, but I hope it'll serve as an interesting example project as you get started exploring the wonderful world of App Script and GSuite extensions. I do intend to keep developing Demo CRM, eventually, so if you'd like get notified when I make changes, sign up for Github and follow the repo.
+Then all of the tabs will disappear along the bottom (don't worry, they're not gone, just hiding). We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them with the 'unhide' option in the utilities menu when it's time to make changes to how the CRM works.
 
-Notice a bug, want to suggest the next feature, etc? Pop open a new Issue and let me know!
+Unfortunately, with no data, it's pretty empty right now. Try clicking the `Add Person` (or Org, or History) buttons, and enter some information, to get a feel for how it works. 
+
+Congrats, you're all set up. I don't think Demo CRM has enough functionality to be useful as it stands, but I hope it'll serve as an interesting example project as you get started exploring the wonderful world of App Script and GSuite extensions. I do intend to keep developing Demo CRM, eventually, so if you'd like get notified when I make changes, sign up for Github and follow the repo <add link?>.
+
+Notice a bug, want to suggest the next feature, etc? Pop open a new Issue and let me know! <add link>
