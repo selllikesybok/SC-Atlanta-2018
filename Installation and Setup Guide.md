@@ -36,23 +36,23 @@ With the `CRM Functions.gs` file open, click on `Select function` option, and ch
 
 Now you'll be prompted to give the App Scrip project access to Google Account, which it needs in order to work. While it looks a little intimidating, remember that this is, ultimately, your code running in your spreadsheet, inside your account, so it shouldn't be cause for worry.
 
-![demo crm auth required](/Graphics/demo crm auth required.png)
+![demo crm auth required](/Graphics/demo%20crm%20auth%20required.png)
 
 Click continue when prompted to being the authorization process, then
 
-![demo crm authflow first](/Graphics/demo crm authflow first.png.PNG)
+![demo crm authflow first](/Graphics/demo%20crm%20authflow%20first.png)
 
-choose the account (if you have more than one) that has the Demo CRM stored on its Google Drive. You'll probably see a warning like  
+choose the account (if you have more than one) that has the Demo CRM stored on its Google Drive. You'll probably see a warning like
 
-![demo crm authflow see more](/Graphics/demo crm authflow see more.png)
+![demo crm authflow see more](/Graphics/demo%20crm%20authflow%20see%20more.png)
 
 which seems to stop you from proceeding, but click 'see more' at the bottom, and you'll get
 
-![demo crm authflow proceed](/Graphics/demo crm authflow proceed.png)
+![demo crm authflow proceed](/Graphics/demo%20crm%20authflow%20proceed.png)
 
 the option to proceed. Which will lead you to the final step, 
 
-![demo crm authflow final](/Graphics/demo crm authflow final.png)
+![demo crm authflow final](/Graphics/demo%20crm%20authflow%20final.png)
 
 explicitly allowing your App Script project to do what you asked it to do!
 
