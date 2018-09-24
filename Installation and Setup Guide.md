@@ -56,20 +56,24 @@ the option to proceed. Which will lead you to the final step,
 
 explicitly allowing your App Script project to do what you asked it to do!
 
-Once you finish, you should see a few things happen - first, a new menu option will appear - it has several options to choose <describe utilities menu>
+Once you give the script permission to run, you should see a few things happen. First, a new menu option (`Utilities`) will appear, with options to `Edit Settings` and `Show Hidden Sheets`.
 
-Next, you'll be prompted to enter some initial settings, like <describe>
+(add image)?
+
+Next, you'll be prompted to enter some initial settings: your name and the time zone.
 
 <image>?
 
-And finally, the page is updated to reflect our new user settings, and your Demo CRM is ready to run! 
+As the page is updated to reflect our new user settings, you'll notice that a number of tabs that were initially visible along the bottom of the screen will disappear.
+
+Don't worry, they're not gone, just hiding! We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them via the `Utilities` menu when it's time to make changes to how the CRM works.
 
 <final image>
 
-Then all of the tabs will disappear along the bottom (don't worry, they're not gone, just hiding). We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them with the 'unhide' option in the utilities menu when it's time to make changes to how the CRM works.
+Congrats, you're all set up!
 
 Unfortunately, with no data, it's pretty empty right now. Try clicking the `Add Person` (or Org, or History) buttons, and enter some information, to get a feel for how it works. 
 
-Congrats, you're all set up. I don't think Demo CRM has enough functionality to be useful as it stands, but I hope it'll serve as an interesting example project as you get started exploring the wonderful world of App Script and GSuite extensions. I do intend to keep developing Demo CRM, eventually, so if you'd like get notified when I make changes, sign up for Github and follow the repo <add link?>.
+I don't think Demo CRM has enough functionality to be useful as it stands, but I hope it'll serve as an interesting example project as you get started exploring the wonderful world of App Script and GSuite extensions. I do intend to keep developing Demo CRM, eventually, so if you'd like get notified when I make changes, sign up for Github and watch the [repo](https://github.com/selllikesybok/SC-Atlanta-2018).
 
-Notice a bug, want to suggest the next feature, etc? Pop open a new Issue and let me know! <add link>
+Notice a bug, want to suggest the next feature, etc? Pop open a [new Issue](/issues/new) and let me know!
