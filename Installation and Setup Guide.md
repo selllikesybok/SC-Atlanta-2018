@@ -58,7 +58,7 @@ explicitly allowing your App Script project to do what you asked it to do!
 
 Once you give the script permission to run, you should see a few things happen. First, a new menu option (`Utilities`) will appear, with options to `Edit Settings` and `Show Hidden Sheets`.
 
-(add image)?
+![utilities menu](/Graphics/utilities-menu.png)
 
 Next, you'll be prompted to enter some initial settings: your name and the time zone.
 
