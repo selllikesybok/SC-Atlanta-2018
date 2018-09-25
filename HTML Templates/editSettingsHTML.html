@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <style>
+      input[type="text"] {
+        width: 75%;
+      }
+      textarea {
+        width: 90%;
+      }
+    </style>
+    <script>
+      function sendDataToUpdateSettings() {
+        var callerName = document.getElementById("callerName").getAttribute("name");
 
+        var userName = document.getElementById("username").value;
+        var userTimeZone = document.getElementById("timeoffset").value;
+
+        var missingRequired = '';
+        
+        if ((userName == "") || (userName == null)) {
+          missingRequired = missingRequired + "\nMust enter your name to continue.";
+        }
+
+        if ((userTimeZone == "") || (userTimeZone == null)) {
+          missingRequired = missingRequired + "\nMust select time zone.";
+        }
+        alert(callerName+" - "+userName+" - "+userTimeZone);
+        if (missingRequired.length > 0) {
+          alert('The following required information is missing, or incorrectly formatted:\n' + missingRequired + '\n\nPlease update the form and save again.');
+        } else {
+          google.script.run.updateSettings(callerName,[userName,userTimeZone]);
+          google.script.host.close();
+        } 
+      }
+    </script>
+  <div id="callerName" name="<?= caller ?>"></div>
+<!--      <div id="callerName" name="dashboard"></div> -->
+    Enter Your Name: <input id="username" type="text" placeholder="e.g. David Galley" /> <br>
+    Choose Your Time Zone: 
+    <select id="timeoffset">
+      <option value="" disabled selected>Select Time Zone</option>
+      <option value="-0400">EDT (UTC-0400)</option>
+      <option value="-0500">EST (UTC-0500)</option>
+      <option value="-0500">CDT (UTC-0500)</option>
+      <option value="-0600">CST (UTC-0600)</option>
+      <option value="-0600">MDT (UTC-0600)</option>
+      <option value="-0700">MST (UTC-0700)</option>
+      <option value="-0700">PDT (UTC-0700)</option>
+      <option value="-0800">PST (UTC-0800)</option>
+      <option value="-0800">AKDT (UTC-0800)</option>
+      <option value="-0900">AKST (UTC-0900)</option>
+      <option value="-0900">HDT (UTC-0900)</option>
+      <option value="-1000">HST (UTC-1000)</option>
+      <option value="" disabled>-----------------</option>
+      <option value="-1200">BIT (UTC-1200)</option>
+      <option value="-1200">IDLW (UTC-1200)</option>
+      <option value="-1100">NUT (UTC-1100)</option>
+      <option value="-1100">SST (UTC-1100)</option>
+      <option value="-1000">CKT (UTC-1000)</option>
+      <option value="-1000">SDT (UTC-1000)</option>
+      <option value="-1000">TAHT (UTC-1000)</option>
+      <option value="-0930">MART (UTC-0930)</option>
+      <option value="-0930">MIT (UTC-0930)</option>
+      <option value="-0900">GAMT (UTC-0900)</option>
+      <option value="-0900">GIT (UTC-0900)</option>
+      <option value="-0800">CIST (UTC-0800)</option>
+      <option value="-0600">EAST (UTC-0600)</option>
+      <option value="-0600">GALT (UTC-0600)</option>
+      <option value="-0500">ACT (UTC-0500)</option>
+      <option value="-0500">COT (UTC-0500)</option>
+      <option value="-0500">CST (UTC-0500)</option>
+      <option value="-0500">EASST (UTC-0500)</option>
+      <option value="-0500">ECT (UTC-0500)</option>
+      <option value="-0500">PET (UTC-0500)</option>
+      <option value="-0400">AMT (UTC-0400)</option>
+      <option value="-0400">AST (UTC-0400)</option>
+      <option value="-0400">BOT (UTC-0400)</option>
+      <option value="-0400">CDT (UTC-0400)</option>
+      <option value="-0400">CLT (UTC-0400)</option>
+      <option value="-0400">COST (UTC-0400)</option>
+      <option value="-0400">ECT (UTC-0400)</option>
+      <option value="-0400"></option>
+      <option value="-0400">FKT (UTC-0400)</option>
+      <option value="-0400">GYT (UTC-0400)</option>
+      <option value="-0400">PYT (UTC-0400)</option>
+      <option value="-0400">VET (UTC-0400)</option>
+      <option value="-0330">NST (UTC-0330)</option>
+      <option value="-0330">NT (UTC-0330)</option>
+      <option value="-0300">ADT (UTC-0300)</option>
+      <option value="-0300">AMST (UTC-0300)</option>
+      <option value="-0300">ART (UTC-0300)</option>
+      <option value="-0300">BRT (UTC-0300)</option>
+      <option value="-0300">CLST (UTC-0300)</option>
+      <option value="-0300">FKST (UTC-0300)</option>
+      <option value="-0300">GFT (UTC-0300)</option>
+      <option value="-0300">PMST (UTC-0300)</option>
+      <option value="-0300">PYST (UTC-0300)</option>
+      <option value="-0300">ROTT (UTC-0300)</option>
+      <option value="-0300">SRT (UTC-0300)</option>
+      <option value="-0300">UYT (UTC-0300)</option>
+      <option value="-0230">NDT (UTC-0230)</option>
+      <option value="-0200">BRST (UTC-0200)</option>
+      <option value="-0200">FNT (UTC-0200)</option>
+      <option value="-0200">GST (UTC-0200)</option>
+      <option value="-0200">PMDT (UTC-0200)</option>
+      <option value="-0200">UYST (UTC-0200)</option>
+      <option value="-0100">AZOT (UTC-0100)</option>
+      <option value="-0100">CVT (UTC-0100)</option>
+      <option value="-0100">EGT (UTC-0100)</option>
+      <option value="+0000">AZOST (UTC±0000)</option>
+      <option value="+0000">EGST (UTC±0000)</option>
+      <option value="+0000">GMT (UTC±0000)</option>
+      <option value="+0000">UTC (UTC±0000)</option>
+      <option value="+0000">WET (UTC±0000)</option>
+      <option value="+0100">BST (UTC+0100)</option>
+      <option value="+0100">CET (UTC+0100)</option>
+      <option value="+0100">DFT (UTC+0100)</option>
+      <option value="+0100">IST (UTC+0100)</option>
+      <option value="+0100">MET (UTC+0100)</option>
+      <option value="+0100">WAT (UTC+0100)</option>
+      <option value="+0100">WEST (UTC+0100)</option>
+      <option value="+0200">CAT (UTC+0200)</option>
+      <option value="+0200">CEST (UTC+0200)</option>
+      <option value="+0200">EET (UTC+0200)</option>
+      <option value="+0200">HAEC (UTC+0200)</option>
+      <option value="+0200">IST (UTC+0200)</option>
+      <option value="+0200">KALT (UTC+0200)</option>
+      <option value="+0200">MEST (UTC+0200)</option>
+      <option value="+0200">SAST (UTC+0200)</option>
+      <option value="+0200">WAST (UTC+0200)</option>
+      <option value="+0300">AST (UTC+0300)</option>
+      <option value="+0300">EAT (UTC+0300)</option>
+      <option value="+0300">EEST (UTC+0300)</option>
+      <option value="+0300">FET (UTC+0300)</option>
+      <option value="+0300">IDT (UTC+0300)</option>
+      <option value="+0300">IOT (UTC+0300)</option>
+      <option value="+0300">MSK (UTC+0300)</option>
+      <option value="+0300">SYOT (UTC+0300)</option>
+      <option value="+0300">TRT (UTC+0300)</option>
+      <option value="+0330">IRST (UTC+0330)</option>
+      <option value="+0400">AMT (UTC+0400)</option>
+      <option value="+0400">AZT (UTC+0400)</option>
+      <option value="+0400">GET (UTC+0400)</option>
+      <option value="+0400">GST (UTC+0400)</option>
+      <option value="+0400">MUT (UTC+0400)</option>
+      <option value="+0400">RET (UTC+0400)</option>
+      <option value="+0400">SAMT (UTC+0400)</option>
+      <option value="+0400">SCT (UTC+0400)</option>
+      <option value="+0400">VOLT (UTC+0400)</option>
+      <option value="+0430">AFT (UTC+0430)</option>
+      <option value="+0430">IRDT (UTC+0430)</option>
+      <option value="+0500">HMT (UTC+0500)</option>
+      <option value="+0500">MAWT (UTC+0500)</option>
+      <option value="+0500">MVT (UTC+0500)</option>
+      <option value="+0500">ORAT (UTC+0500)</option>
+      <option value="+0500">PKT (UTC+0500)</option>
+      <option value="+0500">TFT (UTC+0500)</option>
+      <option value="+0500">TJT (UTC+0500)</option>
+      <option value="+0500">TMT (UTC+0500)</option>
+      <option value="+0500">UZT (UTC+0500)</option>
+      <option value="+0500">YEKT (UTC+0500)</option>
+      <option value="+0530">IST (UTC+0530)</option>
+      <option value="+0530">SLST (UTC+0530)</option>
+      <option value="+0545">NPT (UTC+0545)</option>
+      <option value="+0600">BIOT (UTC+0600)</option>
+      <option value="+0600">BST (UTC+0600)</option>
+      <option value="+0600">BTT (UTC+0600)</option>
+      <option value="+0600">KGT (UTC+0600)</option>
+      <option value="+0600">OMST (UTC+0600)</option>
+      <option value="+0600">VOST (UTC+0600)</option>
+      <option value="+0630">CCT (UTC+0630)</option>
+      <option value="+0630">MMT (UTC+0630)</option>
+      <option value="+0700">CXT (UTC+0700)</option>
+      <option value="+0700">DAVT (UTC+0700)</option>
+      <option value="+0700">HOVT (UTC+0700)</option>
+      <option value="+0700">ICT (UTC+0700)</option>
+      <option value="+0700">KRAT (UTC+0700)</option>
+      <option value="+0700">THA (UTC+0700)</option>
+      <option value="+0700">WIT (UTC+0700)</option>
+      <option value="+0800">AWST (UTC+0800)</option>
+      <option value="+0800">BDT (UTC+0800)</option>
+      <option value="+0800">CHOT (UTC+0800)</option>
+      <option value="+0800">CIT (UTC+0800)</option>
+      <option value="+0800">CST (UTC+0800)</option>
+      <option value="+0800">CT (UTC+0800)</option>
+      <option value="+0800">HKT (UTC+0800)</option>
+      <option value="+0800">HOVST (UTC+0800)</option>
+      <option value="+0800">IRKT (UTC+0800)</option>
+      <option value="+0800">MST (UTC+0800)</option>
+      <option value="+0800">MYT (UTC+0800)</option>
+      <option value="+0800">PHT (UTC+0800)</option>
+      <option value="+0800">PST (UTC+0800)</option>
+      <option value="+0800">SGT (UTC+0800)</option>
+      <option value="+0800">SST (UTC+0800)</option>
+      <option value="+0800">ULAT (UTC+0800)</option>
+      <option value="+0800">WST (UTC+0800)</option>
+      <option value="+0845">ACWST (UTC+0845)</option>
+      <option value="+0845">CWST (UTC+0845)</option>
+      <option value="+0900">CHOST (UTC+0900)</option>
+      <option value="+0900">EIT (UTC+0900)</option>
+      <option value="+0900">JST (UTC+0900)</option>
+      <option value="+0900">KST (UTC+0900)</option>
+      <option value="+0900">TLT (UTC+0900)</option>
+      <option value="+0900">ULAST (UTC+0900)</option>
+      <option value="+0900">YAKT (UTC+0900)</option>
+      <option value="+0930">ACST (UTC+0930)</option>
+      <option value="+1000">AEST (UTC+1000)</option>
+      <option value="+1000">CHST (UTC+1000)</option>
+      <option value="+1000">CHUT (UTC+1000)</option>
+      <option value="+1000">DDUT (UTC+1000)</option>
+      <option value="+1000">PGT (UTC+1000)</option>
+      <option value="+1000">VLAT (UTC+1000)</option>
+      <option value="+1030">ACDT (UTC+1030)</option>
+      <option value="+1030">LHST (UTC+1030)</option>
+      <option value="+1100">AEDT (UTC+1100)</option>
+      <option value="+1100">BST (UTC+1100)</option>
+      <option value="+1100">KOST (UTC+1100)</option>
+      <option value="+1100">LHST (UTC+1100)</option>
+      <option value="+1100">MIST (UTC+1100)</option>
+      <option value="+1100">NCT (UTC+1100)</option>
+      <option value="+1100">NFT (UTC+1100)</option>
+      <option value="+1100">PONT (UTC+1100)</option>
+      <option value="+1100">SAKT (UTC+1100)</option>
+      <option value="+1100">SBT (UTC+1100)</option>
+      <option value="+1100">SRET (UTC+1100)</option>
+      <option value="+1100">VUT (UTC+1100)</option>
+      <option value="+1200">FJT (UTC+1200)</option>
+      <option value="+1200">GILT (UTC+1200)</option>
+      <option value="+1200">MAGT (UTC+1200)</option>
+      <option value="+1200">MHT (UTC+1200)</option>
+      <option value="+1200">NZST (UTC+1200)</option>
+      <option value="+1200">PETT (UTC+1200)</option>
+      <option value="+1200">TVT (UTC+1200)</option>
+      <option value="+1200">WAKT (UTC+1200)</option>
+      <option value="+1245">CHAST (UTC+1245)</option>
+      <option value="+1300">NZDT (UTC+1300)</option>
+      <option value="+1300">PHOT (UTC+1300)</option>
+      <option value="+1300">TKT (UTC+1300)</option>
+      <option value="+1300">TOT (UTC+1300)</option>
+      <option value="+1345">CHADT (UTC+1345)</option>
+      <option value="+1400">LINT (UTC+1400)</option>
+    </select><br><br>
+    <input type="button" value="Close"
+      onclick="google.script.host.close()" />
+    <input type="button" value="Update"
+      onclick="sendDataToUpdateSettings()" /> <!-- should create parameters from the input fields and call update settings, or prompt for missing fields -->
+</body>
+</html>
