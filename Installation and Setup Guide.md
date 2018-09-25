@@ -66,11 +66,11 @@ Next, you'll be prompted to enter some initial settings: your name and the time 
 
 As the dashboard is updated to reflect our new user settings, you'll notice that a number of tabs that were initially visible along the bottom of the screen will disappear.
 
-(before/after)
+![disappearing sheets](/Graphics/disappearing-sheets.png) 
 
 Don't worry, they're not gone, just hiding! We hide these special sheets containing data and templates because editing them directly can change how the CRM works, or even break it. We can always unhide them via the `Utilities` menu when it's time to make changes to how the CRM works.
 
-<final image>
+![all set up](/Graphics/final-view.PNG) 
 
 Congrats, you're all set up!
 
